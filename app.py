@@ -8,18 +8,12 @@ CORS(app)  # << ADD THIS LINE
 # Simple in-memory status (Available or Unavailable)
 status = {"available": True}
 
-@app.route('/')
-def get_status():
-    return jsonify(status)
-
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     global status
-    saved = False
     if request.method == 'POST':
         availability = request.form.get('availability')
         status['available'] = (availability == 'on')
-        saved = True
     return render_template_string('''
 <!DOCTYPE html>
 <html lang="en">
@@ -83,22 +77,11 @@ def admin():
           font-size: 18px;
           cursor: pointer;
         }
-        .success-message {
-          margin-top: 20px;
-          color: green;
-          font-size: 18px;
-        }
     </style>
 </head>
 <body>
 
     <h1>Toggle Availability</h1>
-
-    {% if saved %}
-    <div class="success-message">
-      Your availability has been saved.
-    </div>
-    {% endif %}
 
     <form method="post">
         <label class="switch">
@@ -111,7 +94,7 @@ def admin():
 
 </body>
 </html>
-''', available=status['available'], saved=saved)
+''', available=status['available'])
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
