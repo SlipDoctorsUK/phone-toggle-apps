@@ -8,6 +8,10 @@ CORS(app)  # << ADD THIS LINE
 # Simple in-memory status (Available or Unavailable)
 status = {"available": True}
 
+@app.route('/')
+def get_status():
+    return jsonify(status)
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     global status
