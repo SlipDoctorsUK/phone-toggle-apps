@@ -1,7 +1,9 @@
 from flask import Flask, render_template_string, request, jsonify
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
+CORS(app)  # << ADD THIS LINE
 
 # Simple in-memory status (Available or Unavailable)
 status = {"available": True}
