@@ -18,7 +18,7 @@ def admin():
     if request.method == 'POST':
         availability = request.form.get('availability')
         status['available'] = (availability == 'on')
-        return render_template_string('''
+    return render_template_string('''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +99,7 @@ def admin():
 </body>
 </html>
 ''', status=status)
-
+    
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
