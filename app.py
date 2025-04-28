@@ -89,7 +89,7 @@ def admin():
 
     <form method="post">
         <label class="switch">
-          <input type="checkbox" name="availability" {% if status['available'] %}checked{% endif %}>
+          <input type="checkbox" name="availability" {% if available %}checked{% endif %}>
           <span class="slider"></span>
         </label>
         <br><br>
@@ -98,7 +98,7 @@ def admin():
 
 </body>
 </html>
-''', status=status)
+''', available=status['available'])
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
